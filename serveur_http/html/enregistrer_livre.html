@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Appli livres</title>
+    <script type="text/javascript" src="jquery-3.6.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("jquery chargé")
+        })
+
+        function enregistrer() {
+            $.ajax({
+                method: "post",
+                url: "enregistrer_livre",
+                data: {
+                    titre: $("#titre").val(),
+                    auteur: $("#auteur").val(),
+                    annee: $("#annee").val(),
+                },
+                dataType:"json",
+                success: function (data) {
+                    console.log("data = " + JSON.stringify(data))
+                    // message à afficher
+                    //let s = ""
+                    //data.mess.forEach(m => {
+                       // s += m + "<br>"
+                   // })
+
+                   init_mess()
+
+                    if (data.res) {
+                        $("#mess_ok").html(data.mess)
+                        //$("#mess_nok").html("")
+                    }
+                    else {
+                        //$("#mess_ok").html("")
+                        //$("#mess_nok").html(data.mess)
+                        data.lerr.forEach(m => {
+                            $("#err_"+m.field).html(m.mess)
+                        })
+                        $("#mess_nok").html(data.mess)
+                    }
+                }
+            })
+        }
+
+        function init_mess() {
+            $("#err_titre").html("")
+            $("#err_auteur").html("")
+            $("#err_annee").html("")
+            $("#mess_ok").html("")
+            $("#mess_nok").html("")
+
+        }
+
+
+
+    </script>
+
+</head>
+
+<body>
+    <h1>Appli livres</h1>
+    <p>
+        Bienvenue dans l'application livres
+    </p>
+
+    <table>
+        <tr>
+            <td>Titre : </td>
+            <td><input id="titre" type="text" value=""></td>
+            <td id="err_titre" style="color:red;"></td>
+        </tr>
+        <tr>
+            <td>Auteur : </td>
+            <td><input id="auteur" type="text" value=""></td>
+            <td id="err_auteur" style="color:red;"></td>
+        </tr>
+        <tr>
+            <td>Année : </td>
+            <td><input id="annee" type="text" value=""></td>
+            <td id="err_annee" style="color:red;"></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Envoyer" onclick="enregistrer()"></td>
+        </tr>
+    </table>
+
+    <div id="mess_ok" style="color : green;"></div>
+    <div id="mess_nok" style="color : red;"></div>
+
+
+    <h3>Test</h3>
+    <p>
+    aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+    aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+    aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+    </p>
+    <p>
+    aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+    aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+    aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+    </p>
+    
+    </div>
+    </div>
+    
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 order-sm-12 order-last">
+    <div class="text menu_droite">
+    <h3>Gestion des livres</h3>
+    <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <br>
+    <li><a href="connexion.html">Connexion</a></li>
+    <li><a href="deconnexion.html">Déconnexion</a></li>
+    <br>
+    <li><a href="lister_livre.html">Lister</a></li>
+    <li><a href="enregistrer_livre.html">Enregistrer</a></li>
+    <li><a href="modifier_livre.html">Modifier</a></li>
+    </ul>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+
+</body>
+
+</html>

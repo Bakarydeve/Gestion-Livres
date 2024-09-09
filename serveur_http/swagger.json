@@ -1,0 +1,76 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Livres",
+      "description": "API Livre swagger",
+      "version": "1.0"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+        "/listerLivres": {
+            "post": {
+                "description": "Recupere la liste des livres stocke en BD",
+                "operationId": "listerLivres",
+                "responses": {}
+            }
+        },
+        "/enregistrer_livre": {
+            "post": {
+                "description": "Cree un nouveau livre dans la BD",
+                "operationId": "enregistrer_livre",
+                "produces": [
+                    "application/json"
+                  ],
+                "consumes": [
+                    "application/json"
+                  ],
+                "parameters": [
+                    {
+                        "name": "Livre",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "auteur": {
+                              "type": "string"
+                            },
+                            "titre": {
+                              "type": "string"
+                            },
+                            "annee": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                ],
+                "responses": {}
+            }
+        },
+        "definitions": {
+            "Livre": {
+              "type": "object",
+              "properties": {
+                "auteur": {
+                  "type": "string"
+                },
+                "titre": {
+                  "type": "string"
+                },
+                "annee": {
+                    "type": "integer"
+                  }
+              }
+            }
+          }
+
+    }
+    
+
+
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>
+Liste des livres
+</title>
+</title>
+
+<script type="text/javascript" src="jquery-3.6.3.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+console.log("jquery chargé")
+})
+</script>
+
+</head>
+
+<body>
+
+
+<div class="container">
+<div class="row">
+
+<div class="col">
+<div class="text contenu">
+<h3>
+Liste des livres
+</h3>
+<br>
+
+<script type="text/javascript">
+
+
+$(document).ready(function () {
+        console.log("jquery chargé")
+        lister()
+    })
+
+    function lister() {
+          $.ajax({
+            method: "post",
+            // normalement on devrait utiliser "get" (CRUD)
+            url: "listerLivres",
+            dataType: "json",
+            success: function (data) {
+
+                let html = "<table>"
+
+                if (data.livres && data.livres.length > 0) {
+                // Parcourez chaque livre et ajoutez-le au tableau HTML
+                data.livres.forEach(livre => {
+                    html += "<tr>";
+                    html += "<td>" + livre.titre + "</td>";
+                    html += "<td>" + livre.auteur + "</td>";
+                    html += "<td>" + livre.annee + "</td>";
+                    html += "</tr>";
+                });
+            } else {
+                // Si aucune donnée de livre n'est disponible, affichez un message dans le tableau
+                html += "<tr><td colspan='3'>Aucun livre trouvé</td></tr>";
+            }
+            html += "</table>";
+
+            $("#tab").html(html);
+
+            }
+        })
+    }
+
+</script>
+<div id="tab"></div>
+<!-- -->
+
+<h3>Test</h3>
+<p>
+aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+</p>
+<p>
+aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+aaaa zzz eeee rrrr tttt aaaa zzz eeee rrrr tttt
+</p>
+
+</div>
+</div>
+
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 order-sm-12 order-last">
+<div class="text menu_droite">
+<h3>Gestion des livres</h3>
+<ul>
+<li><a href="index.html">Accueil</a></li>
+<br>
+<li><a href="connexion.html">Connexion</a></li>
+<li><a href="deconnexion.html">Déconnexion</a></li>
+<br>
+<li><a href="lister_livre.html">Lister</a></li>
+<li><a href="enregistrer_livre.html">Enregistrer</a></li>
+<li><a href="modifier_livre.html">Modifier</a></li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+
+</body>
+
+</html>
